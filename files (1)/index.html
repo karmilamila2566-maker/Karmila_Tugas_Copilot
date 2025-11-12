@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karmila - Resume & Portofolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Karmila</div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active">Beranda</a></li>
+            <li><a href="#about" class="nav-link">Tentang Saya</a></li>
+            <li><a href="#portfolio" class="nav-link">Portofolio</a></li>
+            <li><a href="#contact" class="nav-link">Kontak</a></li>
+        </ul>
+        <div class="nav-toggle" id="navToggle">&#9776;</div>
+    </nav>
+
+    <main>
+        <section id="home" class="section fade">
+            <div class="content home-content">
+                <h1>Halo, Saya <span class="blue">Karmila</span></h1>
+                <p class="subtitle">Mahasiswa Universitas Komputama Cilacap <br>Web & Software Enthusiast</p>
+                <img src="https://via.placeholder.com/150" alt="Foto Karmila" class="profile-img">
+            </div>
+        </section>
+
+        <section id="about" class="section fade">
+            <div class="content">
+                <h2>Tentang Saya</h2>
+                <p>
+                    Saya adalah mahasiswa aktif yang tertarik dan fokus dalam pengembangan web, desain UI/UX modern, serta membangun aplikasi digital yang impactful. Terbuka berkolaborasi dan terus belajar di dunia teknologi yang dinamis.
+                </p>
+                <ul class="skills">
+                    <li>Web & Software Development</li>
+                    <li>UI/UX Design</li>
+                    <li>Project Management</li>
+                    <li>Public Speaking</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="portfolio" class="section fade">
+            <div class="content">
+                <h2>Portofolio</h2>
+                <div class="portfolio-list">
+                    <div class="card fade">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=cover&w=400&q=80" alt="Project E-Commerce" class="project-img">
+                        <h3>Website E-Commerce</h3>
+                        <p>Platform toko online modern dengan React dan Firebase, tampilan responsif dan fitur pembayaran online.</p>
+                    </div>
+                    <div class="card fade">
+                        <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=cover&w=400&q=80" alt="Sistem Absensi Digital" class="project-img">
+                        <h3>Sistem Absensi Digital</h3>
+                        <p>Aplikasi absensi berbasis web untuk Universitas Komputama Cilacap, terintegrasi QR dan dashboard statistik kehadiran.</p>
+                    </div>
+                    <div class="card fade">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=cover&w=400&q=80" alt="Landing Page UKM" class="project-img">
+                        <h3>Landing Page UKM</h3>
+                        <p>Desain dan implementasi landing page promo UKM dengan HTML, CSS animasi, dan JavaScript interaktif.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section fade">
+            <div class="content">
+                <h2>Kontak</h2>
+                <form id="contactForm">
+                    <input type="text" name="name" placeholder="Nama Anda" required>
+                    <input type="email" name="email" placeholder="Email Anda" required>
+                    <textarea name="message" placeholder="Pesan Anda" required></textarea>
+                    <button type="submit">Kirim Pesan</button>
+                </form>
+                <div class="contact-info">
+                    <p>Email: karmila@email.com</p>
+                    <p>LinkedIn: <a href="https://linkedin.com/in/karmila" target="_blank">linkedin.com/in/karmila</a></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2025 Karmila | Komputama Cilacap</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
