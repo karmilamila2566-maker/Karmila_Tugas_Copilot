@@ -3,88 +3,400 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karmila - Resume & Portofolio</title>
+    <title>Karmila - Freelancer & Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">Karmila</div>
-        <ul class="nav-menu">
-            <li><a href="#home" class="nav-link active">Beranda</a></li>
-            <li><a href="#about" class="nav-link">Tentang Saya</a></li>
-            <li><a href="#portfolio" class="nav-link">Portofolio</a></li>
-            <li><a href="#contact" class="nav-link">Kontak</a></li>
-        </ul>
-        <div class="nav-toggle" id="navToggle">&#9776;</div>
-    </nav>
+    <button class="hamburger" id="hamburger">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <main>
-        <section id="home" class="section fade">
-            <div class="content home-content">
-                <h1>Halo, Saya <span class="blue">Karmila</span></h1>
-                <p class="subtitle">Mahasiswa Universitas Komputama Cilacap <br>Web & Software Enthusiast</p>
-                <img src="https://via.placeholder.com/150" alt="Foto Karmila" class="profile-img">
+    <div class="container">
+        <!-- Sidebar Navigasi -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>KARMILA</h1>
+                <p>Freelancer & Web Developer</p>
             </div>
-        </section>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active" data-section="home">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link" data-section="about">
+                        <i class="fas fa-user"></i>
+                        <span>Tentang Saya</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#resume" class="nav-link" data-section="resume">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Resume</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                 <a href="#experience" class="nav-link" data-section="experience">
+                     <i class="fas fa-briefcase"></i>
+                     <span>Experience</span>
+                     </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#skills" class="nav-link" data-section="skills">
+                        <i class="fas fa-code"></i>
+                        <span>Keahlian</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#portfolio" class="nav-link" data-section="portfolio">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Portofolio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#blog" class="nav-link" data-section="blog">
+                        <i class="fas fa-blog"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link" data-section="contact">
+                        <i class="fas fa-envelope"></i>
+                        <span>Kontak</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
-        <section id="about" class="section fade">
-            <div class="content">
-                <h2>Tentang Saya</h2>
-                <p>
-                    Saya adalah mahasiswa aktif yang tertarik dan fokus dalam pengembangan web, desain UI/UX modern, serta membangun aplikasi digital yang impactful. Terbuka berkolaborasi dan terus belajar di dunia teknologi yang dinamis.
-                </p>
-                <ul class="skills">
-                    <li>Web & Software Development</li>
-                    <li>UI/UX Design</li>
-                    <li>Project Management</li>
-                    <li>Public Speaking</li>
-                </ul>
+        <!-- Kartu Profil -->
+        <div class="profile-card" id="home">
+            <div class="profile-img">
+                <img src="https://i.pravatar.cc/300" alt="Foto Profil Karmila">
             </div>
-        </section>
+            <div class="profile-info">
+                <h2>KARMILA</h2>
+                <p id="typing-text"></p>
+            </div>
+            <div class="btn-group">
+                <a href="#" class="btn btn-primary">Download CV</a>
+                <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="social-link"><i class="fas fa-link"></i></a>
+            </div>
+        </div>
 
-        <section id="portfolio" class="section fade">
-            <div class="content">
-                <h2>Portofolio</h2>
-                <div class="portfolio-list">
-                    <div class="card fade">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=cover&w=400&q=80" alt="Project E-Commerce" class="project-img">
-                        <h3>Website E-Commerce</h3>
-                        <p>Platform toko online modern dengan React dan Firebase, tampilan responsif dan fitur pembayaran online.</p>
+        <!-- Panel Konten Dinamis -->
+        <main class="content-panel">
+            <!-- Tentang Saya -->
+            <section id="about" class="content-section active">
+                <h2 class="section-title">Tentang Saya</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Halo! Saya Karmila, seorang Freelancer & Web Developer dengan pengalaman lebih dari 3 tahun dalam mengembangkan solusi digital yang kreatif dan fungsional.</p>
+                        <p>Saya memiliki passion dalam menciptakan pengalaman pengguna yang menarik dan antarmuka yang intuitif. Dengan latar belakang desain dan pengembangan, saya mampu menggabungkan estetika visual dengan fungsionalitas teknis.</p>
+                        <p>Saya percaya bahwa setiap proyek adalah kesempatan untuk belajar dan tumbuh, dan saya selalu bersemangat untuk menghadapi tantangan baru dalam dunia teknologi.</p>
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">50+</div>
+                                <div class="stat-label">Proyek Selesai</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">30+</div>
+                                <div class="stat-label">Klien Puas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">3+</div>
+                                <div class="stat-label">Tahun Pengalaman</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">15+</div>
+                                <div class="stat-label">Teknologi Dikuasai</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card fade">
-                        <img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=cover&w=400&q=80" alt="Sistem Absensi Digital" class="project-img">
-                        <h3>Sistem Absensi Digital</h3>
-                        <p>Aplikasi absensi berbasis web untuk Universitas Komputama Cilacap, terintegrasi QR dan dashboard statistik kehadiran.</p>
-                    </div>
-                    <div class="card fade">
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=cover&w=400&q=80" alt="Landing Page UKM" class="project-img">
-                        <h3>Landing Page UKM</h3>
-                        <p>Desain dan implementasi landing page promo UKM dengan HTML, CSS animasi, dan JavaScript interaktif.</p>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Tentang Saya" style="width: 100%; border-radius: var(--radius);">
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="contact" class="section fade">
-            <div class="content">
-                <h2>Kontak</h2>
-                <form id="contactForm">
-                    <input type="text" name="name" placeholder="Nama Anda" required>
-                    <input type="email" name="email" placeholder="Email Anda" required>
-                    <textarea name="message" placeholder="Pesan Anda" required></textarea>
-                    <button type="submit">Kirim Pesan</button>
-                </form>
-                <div class="contact-info">
-                    <p>Email: karmila@email.com</p>
-                    <p>LinkedIn: <a href="https://linkedin.com/in/karmila" target="_blank">linkedin.com/in/karmila</a></p>
+            <!-- Resume -->
+            <section id="resume" class="content-section">
+                <h2 class="section-title">Resume</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2022 - Sekarang</div>
+                            <h3>Web Developer Freelance</h3>
+                            <p>Mengembangkan berbagai website dan aplikasi web untuk klien dari berbagai industri. Fokus pada solusi responsif dan user-friendly.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2020 - 2022</div>
+                            <h3>Frontend Developer - Tech Solutions Inc.</h3>
+                            <p>Bertanggung jawab mengembangkan antarmuka pengguna untuk aplikasi web perusahaan menggunakan React.js dan Vue.js.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2018 - 2020</div>
+                            <h3>Web Designer - Creative Agency</h3>
+                            <p>Mendesain tata letak dan antarmuka pengguna untuk berbagai proyek web, fokus pada pengalaman pengguna dan estetika visual.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <div class="timeline-date">2014 - 2018</div>
+                            <h3>Sarjana Teknik Informatika</h3>
+                            <p>Universitas Teknologi Indonesia, dengan fokus pada pengembangan web dan desain antarmuka pengguna.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section Baru -->
+<section id="experience" class="content-section">
+    <h2 class="section-title">Experience</h2>
+    <div class="experience-timeline">
+        <div class="experience-item">
+            <div class="experience-date">2022 - Present</div>
+            <div class="experience-content">
+                <h3>Senior Web Developer</h3>
+                <h4>Tech Solutions Inc.</h4>
+                <p>Memimpin pengembangan aplikasi web untuk klien korporat, menerapkan best practices, dan mentoring junior developers.</p>
+                <div class="experience-tech">
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2020 - 2022</div>
+            <div class="experience-content">
+                <h3>Frontend Developer</h3>
+                <h4>Digital Creative Agency</h4>
+                <p>Mengembangkan antarmuka pengguna untuk berbagai proyek web dan mobile aplikasi dengan fokus pada performa dan user experience.</p>
+                <div class="experience-tech">
+                    <span class="tech-tag">Vue.js</span>
+                    <span class="tech-tag">TypeScript</span>
+                    <span class="tech-tag">SASS</span>
+                </div>
+            </div>
+        </div>
+        <div class="experience-item">
+            <div class="experience-date">2018 - 2020</div>
+            <div class="experience-content">
+                <h3>Web Developer</h3>
+                <h4>Startup XYZ</h4>
+                <p>Bertanggung jawab dalam pengembangan full-stack untuk produk startup, dari konsep hingga deployment.</p>
+                <div class="experience-tech">
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">PHP</span>
+                    <span class="tech-tag">MySQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <footer class="footer">
-        <p>&copy; 2025 Karmila | Universitas Komputama Cilacap</p>
-    </footer>
+            <!-- Keahlian -->
+            <section id="skills" class="content-section">
+                <h2 class="section-title">Keahlian</h2>
+                <div class="skills-container">
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>HTML/CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>React.js</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>Vue.js</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>UI/UX Design</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-info">
+                            <span>PHP & MySQL</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Portofolio -->
+            <section id="portfolio" class="content-section">
+                <h2 class="section-title">Portofolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Proyek 1" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">E-commerce Website</h3>
+                            <p class="portfolio-desc">Platform e-commerce dengan fitur lengkap untuk penjualan online.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Proyek 2" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">Dashboard Analytics</h3>
+                            <p class="portfolio-desc">Dashboard interaktif untuk visualisasi data dan analitik bisnis.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Proyek 3" class="portfolio-img">
+                        <div class="portfolio-overlay">
+                            <h3 class="portfolio-title">Aplikasi Mobile</h3>
+                            <p class="portfolio-desc">Aplikasi mobile untuk manajemen tugas dan produktivitas.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Blog -->
+            <section id="blog" class="content-section">
+                <h2 class="section-title">Blog</h2>
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Blog 1" class="blog-img">
+                        <div class="blog-content">
+                            <div class="blog-date">15 Juni 2023</div>
+                            <h3 class="blog-title">Tips Mengoptimalkan Performa Website</h3>
+                            <p class="blog-excerpt">Panduan praktis untuk meningkatkan kecepatan dan performa website Anda dengan teknik-teknik terbaru.</p>
+                            <a href="#" class="blog-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Blog 2" class="blog-img">
+                        <div class="blog-content">
+                            <div class="blog-date">2 Juli 2023</div>
+                            <h3 class="blog-title">Mengenal Framework JavaScript Terpopuler 2023</h3>
+                            <p class="blog-excerpt">Perbandingan mendalam antara React, Vue, dan Angular untuk membantu Anda memilih framework yang tepat.</p>
+                            <a href="#" class="blog-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Blog 3" class="blog-img">
+                        <div class="blog-content">
+                            <div class="blog-date">20 Juli 2023</div>
+                            <h3 class="blog-title">Prinsip Desain UI/UX untuk Pengalaman Pengguna yang Lebih Baik</h3>
+                            <p class="blog-excerpt">Pelajari prinsip-prinsip dasar desain UI/UX yang dapat meningkatkan engagement pengguna pada website Anda.</p>
+                            <a href="#" class="blog-link">Baca Selengkapnya <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kontak -->
+            <section id="contact" class="content-section">
+                <h2 class="section-title">Kontak</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h3>Lokasi</h3>
+                                <p>Jakarta, Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3>Email</h3>
+                                <p>hello@karmila.dev</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3>Telepon</h3>
+                                <p>+62 812 3456 7890</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div>
+                                <h3>Website</h3>
+                                <p>www.karmila.dev</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Nama Lengkap" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Alamat Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Subjek" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
