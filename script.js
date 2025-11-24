@@ -5,6 +5,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const contentSections = document.querySelectorAll('.content-section');
 const skillProgressBars = document.querySelectorAll('.skill-progress');
 const typingText = document.getElementById('typing-text');
+const profileCard = document.getElementById('home-profile');
 
 // Text untuk efek mengetik
 const texts = [
@@ -56,23 +57,85 @@ hamburger.addEventListener('click', () => {
         : '<i class="fas fa-bars"></i>';
 });
 
-// Fungsi untuk navigasi antar section
+// Fungsi untuk mengelola tampilan profile card
+function manageProfileCard() {
+    const activeSection = document.querySelector('.content-section.active');
+    if (activeSection && activeSection.id === 'home') {
+        profileCard.classList.add('active');
+    } else {
+        profileCard.classList.remove('active');
+    }
+}
+
+// FUNGSI BARU: Untuk mengupdate menu aktif berdasarkan scroll
+function updateActiveMenu() {
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    let currentSection = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (window.pageYOffset >= sectionTop && 
+            window.pageYOffset < sectionTop + sectionHeight) {
+            currentSection = sectionId;
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('data-section') === currentSection) {
+            link.classList.add('active');
+            
+            // Kelola tampilan profile card
+            if (currentSection === 'home') {
+                profileCard.classList.add('active');
+            } else {
+                profileCard.classList.remove('active');
+            }
+        }
+    });
+}
+
+// FUNGSI BARU: Untuk smooth scroll ke section
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        window.scrollTo({
+            top: section.offsetTop,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// FUNGSI YANG DIPERBAIKI: Untuk navigasi antar section
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         
-        // Hapus kelas active dari semua link
-        navLinks.forEach(item => item.classList.remove('active'));
+        const targetSection = link.getAttribute('data-section');
         
-        // Tambah kelas active ke link yang diklik
+        // Smooth scroll ke section (PERUBAHAN)
+        scrollToSection(targetSection);
+        
+        // Update menu aktif
+        navLinks.forEach(item => item.classList.remove('active'));
         link.classList.add('active');
         
-        // Sembunyikan semua section
-        contentSections.forEach(section => section.classList.remove('active'));
+        // Kelola tampilan profile card
+        if (targetSection === 'home') {
+            profileCard.classList.add('active');
+        } else {
+            profileCard.classList.remove('active');
+        }
         
-        // Tampilkan section yang sesuai
-        const targetSection = link.getAttribute('data-section');
-        document.getElementById(targetSection).classList.add('active');
+        // Animasi skill bars
+        if (targetSection === 'skills') {
+            setTimeout(animateSkillBars, 300);
+        }
         
         // Tutup sidebar di mobile setelah memilih menu
         if (window.innerWidth <= 992) {
@@ -82,7 +145,7 @@ navLinks.forEach(link => {
     });
 });
 
-// Fungsi untuk animasi progress bar saat section skills terlihat
+// Fungsi untuk animasi skill bars
 function animateSkillBars() {
     skillProgressBars.forEach(bar => {
         const width = bar.getAttribute('data-width');
@@ -90,47 +153,33 @@ function animateSkillBars() {
     });
 }
 
-// Observer untuk memicu animasi saat section skills masuk viewport
-const skillsSection = document.getElementById('skills');
-const observerOptions = {
-    threshold: 0.5
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateSkillBars();
-        }
-    });
-}, observerOptions);
-
-if (skillsSection) {
-    observer.observe(skillsSection);
-}
-
-// Form submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Pesan Anda telah berhasil dikirim! Saya akan membalasnya secepatnya.');
-        contactForm.reset();
-    });
-}
-
-// Inisialisasi
+// Inisialisasi YANG DIPERBAIKI
 document.addEventListener('DOMContentLoaded', () => {
     // Mulai efek mengetik
     setTimeout(typeEffect, 1000);
     
+    // Kelola profile card saat pertama load
+    manageProfileCard();
+    
+    // Update menu aktif berdasarkan posisi scroll awal (BARU)
+    updateActiveMenu();
+    
+    // Animasi skill bars jika skills section aktif
+    if (document.getElementById('skills').classList.contains('active')) {
+        animateSkillBars();
+    }
+    
+    // EVENT LISTENER BARU: Untuk update menu saat scroll
+    window.addEventListener('scroll', updateActiveMenu);
+    
     // Animasi saat scroll
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        const parallaxElements = document.querySelectorAll('.profile-card');
+        const parallaxElements = document.querySelectorAll('.profile-card.active');
         
         parallaxElements.forEach(el => {
             const speed = 0.5;
-            el.style.transform = `translateY(${scrolled * speed}px)`;
+            el.style.transform = `translateY(${-50 + scrolled * speed}px)`;
         });
     });
 });

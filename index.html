@@ -5,7 +5,952 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karmila - Freelancer & Web Developer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* RESET & VARIABLES */
+        :root {
+            --gradient: linear-gradient(135deg, #FFCF8F, #FF9BBB, #A37BFE, #5FB2FF, #4EDFD3);
+            --light: #ffffff;
+            --dark: #333333;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--gradient);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* LAYOUT UTAMA */
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--light);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        /* SIDEBAR NAVIGASI */
+        .sidebar {
+            width: 250px;
+            background: var(--light);
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+            transition: var(--transition);
+            left: 0;
+            top: 0;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: 10px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: var(--radius);
+            color: var(--dark);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--gradient);
+            color: var(--light);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-link i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* KARTU PROFIL - DESAIN BARU DENGAN FOTO PERSEGI PANJANG */
+        .profile-card {
+            width: 900px;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 50%;
+            left: calc(250px + 1.5in);
+            transform: translateY(-50%);
+            z-index: 99;
+            display: none;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .profile-card.active {
+            display: block;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .profile-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-img-rectangle {
+            width: 100%;
+            height: 280px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border: 4px solid transparent;
+            background: linear-gradient(45deg, #FFCF8F, #FF9BBB, #A37BFE, #5FB2FF);
+            padding: 4px;
+        }
+
+        .profile-img-rectangle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .profile-basic-info {
+            text-align: center;
+        }
+
+        .profile-basic-info h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: var(--dark);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 500;
+            min-height: 27px;
+        }
+
+        .profile-intro h3 {
+            font-size: 20px;
+            color: var(--dark);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 0;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 120px;
+            border: none;
+        }
+
+        .btn-resume {
+            background: var(--gradient);
+            color: var(--light);
+            box-shadow: 0 5px 15px rgba(95, 178, 255, 0.3);
+        }
+
+        .btn-projects {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid var(--dark);
+        }
+
+        .btn-resume:hover, .btn-projects:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Social Links untuk Profile Card */
+        .profile-social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .profile-social-links .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            color: var(--light);
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-social-links .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-description {
+            padding-top: 20px;
+        }
+
+        .profile-description p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #666;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        /* Animasi typing text */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(-50%) translateY(0px); }
+            50% { transform: translateY(-50%) translateY(-10px); }
+            100% { transform: translateY(-50%) translateY(0px); }
+        }
+
+        /* PANEL KONTEN */
+        .content-panel {
+            flex: 1;
+            padding: 30px;
+            background: var(--light);
+            transition: var(--transition);
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient);
+        }
+
+        /* TENTANG SAYA */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        /* RESUME */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background: var(--gradient);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -2px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: #777;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        /* EXPERIENCE SECTION */
+        .experience-timeline {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .experience-date {
+            width: 150px;
+            flex-shrink: 0;
+            font-weight: 600;
+            color: #777;
+            padding-right: 20px;
+        }
+
+        .experience-content {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .experience-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .experience-content h3 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .experience-content h4 {
+            margin-bottom: 10px;
+            color: #777;
+            font-weight: 500;
+        }
+
+        .experience-tech {
+            margin-top: 10px;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: var(--gradient);
+            color: var(--light);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        /* KEAHLIAN */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-info span:first-child {
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* PORTOFOLIO */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+        }
+
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: var(--transition);
+            padding: 20px;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+
+        .portfolio-desc {
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        /* BLOG */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .blog-card {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            background: var(--light);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-date {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .blog-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .blog-excerpt {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .blog-link {
+            color: #5FB2FF;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .blog-link:hover {
+            color: #A37BFE;
+        }
+
+        .blog-link i {
+            margin-left: 5px;
+            transition: var(--transition);
+        }
+
+        .blog-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* KONTAK */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-item h3 {
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .contact-item p {
+            color: #777;
+        }
+
+        .contact-form {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: var(--radius);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 16px;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            border-color: #5FB2FF;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(95, 178, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: var(--light);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* HAMBURGER MENU */
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--gradient);
+            color: var(--light);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1200px) {
+            .profile-card {
+                left: calc(250px + 1in);
+                width: 700px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .nav-menu {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-item {
+                margin: 5px;
+            }
+            
+            .content-panel {
+                padding: 20px;
+                margin-left: 0;
+            }
+            
+            .hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .about-content, 
+            .skills-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            /* PERBAIKAN PROFILE CARD DI MOBILE */
+            .profile-card {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 400px;
+                animation: float-mobile 6s ease-in-out infinite;
+            }
+            
+            @keyframes float-mobile {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+                100% { transform: translateY(0px); }
+            }
+            
+            .profile-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .profile-img-rectangle {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                width: 100%;
+                max-width: 400px;
+                margin: 20px auto;
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+            }
+            
+            .portfolio-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+            }
+            
+            .nav-item {
+                width: 100%;
+            }
+            
+            .experience-item {
+                flex-direction: column;
+            }
+            
+            .experience-date {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-panel {
+                padding: 15px;
+            }
+            
+            .section-title {
+                font-size: 24px;
+            }
+            
+            .contact-form {
+                padding: 20px;
+            }
+            
+            .timeline-item {
+                padding-left: 50px;
+                padding-right: 15px;
+            }
+            
+            .timeline::after {
+                left: 21px;
+            }
+        }
+
+        /* Perbaikan untuk timeline di mobile */
+        @media (max-width: 992px) {
+            .timeline-item::before {
+                content: '';
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background: var(--gradient);
+                border-radius: 50%;
+                left: -10px;
+                top: 15px;
+                z-index: 1;
+            }
+            
+            .timeline-item:nth-child(even)::before {
+                left: -10px;
+            }
+        }
+    </style>
 </head>
 <body>
     <button class="hamburger" id="hamburger">
@@ -71,33 +1016,58 @@
             </ul>
         </nav>
 
-        <!-- Kartu Profil -->
-        <div class="profile-card" id="home">
-            <div class="profile-img">
-                <img src="https://i.pravatar.cc/300" alt="Foto Profil Karmila">
-            </div>
-            <div class="profile-info">
-                <h2>KARMILA</h2>
-                <p id="typing-text"></p>
-            </div>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">Download CV</a>
-                <a href="#contact" class="btn btn-outline">Hubungi Saya</a>
-            </div>
-            <div class="social-links">
-                <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                <a href="#" class="social-link"><i class="fas fa-link"></i></a>
+        <!-- Kartu Profil - HANYA TAMPIL DI HOME -->
+        <div class="profile-card" id="home-profile">
+            <div class="profile-content">
+                <div class="profile-left">
+                    <div class="profile-img-rectangle">
+                        <!-- Foto Profil Karmila yang Lebih Profesional -->
+                        <img src="assets/Karmila 1.jpg" alt="Foto Profil Karmila">
+                    </div>
+                    <div class="profile-basic-info">
+                        <h2>KARMILA</h2>
+                        <p id="typing-text" class="profile-subtitle"></p>
+                        
+                        <div class="profile-intro">
+                            <h3>Here's who I am & what I do</h3>
+                        </div>
+                        
+                       <div class="action-buttons">
+                            <a href="#" class="btn btn-resume">RESUME</a>
+                            <a href="#portfolio" class="btn btn-projects">PROJECTS</a>
+                        </div>
+
+                        <!-- Tambahkan social links di sini -->
+                        <div class="profile-social-links">
+                            <a href="http://tiktok.com/@mila_25766" class="social-link"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://www.instagram.com/karmila_2566?igsh=bHVkM2R2bGExbHZ2" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/6283111701845" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://t.me//karmila_2566" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=100054210904308" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://lynk.id/kar.create" class="social-link"><i class="fas fa-link"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="profile-description">
+                    <h1><b><i>Selamat Datang .....</i></b></h1>
+                    <br/>
+                    <p>Saya seorang Freelancer & Web Developer dengan pengalaman lebih dari 3 tahun dalam mengembangkan solusi digital yang kreatif dan fungsional.</p>
+                    <p>Saya memiliki passion dalam menciptakan pengalaman pengguna yang menarik dan antarmuka yang intuitif. Dengan latar belakang desain dan pengembangan, saya mampu menggabungkan estetika visual dengan fungsionalitas teknis.</p>
+                    <p>Spesialisasi saya meliputi pengembangan frontend dengan React.js dan Vue.js, serta desain UI/UX yang berfokus pada pengalaman pengguna yang optimal.</p>
+                </div>
             </div>
         </div>
 
         <!-- Panel Konten Dinamis -->
         <main class="content-panel">
+            <!-- Home Section -->
+            <section id="home" class="content-section active">
+                <!-- Konten home akan ditampilkan di profile card -->
+            </section>
+
             <!-- Tentang Saya -->
-            <section id="about" class="content-section active">
+            <section id="about" class="content-section">
                 <h2 class="section-title">Tentang Saya</h2>
                 <div class="about-content">
                     <div class="about-text">
@@ -135,80 +1105,80 @@
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-date">2022 - Sekarang</div>
-                            <h3>Web Developer Freelance</h3>
-                            <p>Mengembangkan berbagai website dan aplikasi web untuk klien dari berbagai industri. Fokus pada solusi responsif dan user-friendly.</p>
+                            <div class="timeline-date">2012 - 2017</div>
+                            <h3>SD Negeri Kutabima 04</h3>
+                            <p>Awal mula saya mencari ilmu dengan belacar membaca, menulis, menghitung, dan disini perjuangan mencari ilmu saya dimulai, saya sekolah dasar pada saat umur saya meninjak 6 tahun</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-date">2020 - 2022</div>
-                            <h3>Frontend Developer - Tech Solutions Inc.</h3>
-                            <p>Bertanggung jawab mengembangkan antarmuka pengguna untuk aplikasi web perusahaan menggunakan React.js dan Vue.js.</p>
+                            <div class="timeline-date">2018 - 2021</div>
+                            <h3>SMP Negeri 02 Cimanggu</h3>
+                            <p>Langkah kedua mencari ilmu dengan lanjut ke sekolah menengah pertama,, disini saya belajar untuk mengasah otak dan meningkatkan pengetahuan yang sudah saya dapat di sekolah dasar</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-date">2018 - 2020</div>
-                            <h3>Web Designer - Creative Agency</h3>
-                            <p>Mendesain tata letak dan antarmuka pengguna untuk berbagai proyek web, fokus pada pengalaman pengguna dan estetika visual.</p>
+                            <div class="timeline-date">2021 - 2024</div>
+                            <h3>SMK Komputama Pesahangan</h3>
+                            <p>Langkah berikutnya menuju dunia kerja, aku memilih sekolah menengah kejuruan untuk menambah skil dibidang komputer, di smk komputama pesahangan ini aku mengambil jurusan Teknik Jaringan Komputer</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <div class="timeline-date">2014 - 2018</div>
-                            <h3>Sarjana Teknik Informatika</h3>
-                            <p>Universitas Teknologi Indonesia, dengan fokus pada pengembangan web dan desain antarmuka pengguna.</p>
+                            <div class="timeline-date">2024 - Sekarang</div>
+                            <h3>Universitas Komputama Cilacap</h3>
+                            <p>Langkah akhir ku untuk bersekolah , universitas komputama ini berbasis komputer dan aku mengambil jurusan sistem informasi.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Experience Section Baru -->
-<section id="experience" class="content-section">
-    <h2 class="section-title">Experience</h2>
-    <div class="experience-timeline">
-        <div class="experience-item">
-            <div class="experience-date">2022 - Present</div>
-            <div class="experience-content">
-                <h3>Senior Web Developer</h3>
-                <h4>Tech Solutions Inc.</h4>
-                <p>Memimpin pengembangan aplikasi web untuk klien korporat, menerapkan best practices, dan mentoring junior developers.</p>
-                <div class="experience-tech">
-                    <span class="tech-tag">React</span>
-                    <span class="tech-tag">Node.js</span>
-                    <span class="tech-tag">MongoDB</span>
+            <section id="experience" class="content-section">
+                <h2 class="section-title">Experience</h2>
+                <div class="experience-timeline">
+                    <div class="experience-item">
+                        <div class="experience-date">2022 - Present</div>
+                        <div class="experience-content">
+                            <h3>Senior Web Developer</h3>
+                            <h4>Tech Solutions Inc.</h4>
+                            <p>Memimpin pengembangan aplikasi web untuk klien korporat, menerapkan best practices, dan mentoring junior developers.</p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2020 - 2022</div>
+                        <div class="experience-content">
+                            <h3>Frontend Developer</h3>
+                            <h4>Digital Creative Agency</h4>
+                            <p>Mengembangkan antarmuka pengguna untuk berbagai proyek web dan mobile aplikasi dengan fokus pada performa dan user experience.</p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">Vue.js</span>
+                                <span class="tech-tag">TypeScript</span>
+                                <span class="tech-tag">SASS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-date">2018 - 2020</div>
+                        <div class="experience-content">
+                            <h3>Web Developer</h3>
+                            <h4>Startup XYZ</h4>
+                            <p>Bertanggung jawab dalam pengembangan full-stack untuk produk startup, dari konsep hingga deployment.</p>
+                            <div class="experience-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">PHP</span>
+                                <span class="tech-tag">MySQL</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="experience-item">
-            <div class="experience-date">2020 - 2022</div>
-            <div class="experience-content">
-                <h3>Frontend Developer</h3>
-                <h4>Digital Creative Agency</h4>
-                <p>Mengembangkan antarmuka pengguna untuk berbagai proyek web dan mobile aplikasi dengan fokus pada performa dan user experience.</p>
-                <div class="experience-tech">
-                    <span class="tech-tag">Vue.js</span>
-                    <span class="tech-tag">TypeScript</span>
-                    <span class="tech-tag">SASS</span>
-                </div>
-            </div>
-        </div>
-        <div class="experience-item">
-            <div class="experience-date">2018 - 2020</div>
-            <div class="experience-content">
-                <h3>Web Developer</h3>
-                <h4>Startup XYZ</h4>
-                <p>Bertanggung jawab dalam pengembangan full-stack untuk produk startup, dari konsep hingga deployment.</p>
-                <div class="experience-tech">
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">PHP</span>
-                    <span class="tech-tag">MySQL</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+            </section>
 
             <!-- Keahlian -->
             <section id="skills" class="content-section">
@@ -344,7 +1314,7 @@
                             </div>
                             <div>
                                 <h3>Lokasi</h3>
-                                <p>Jakarta, Indonesia</p>
+                                <p>Cimanggu, cilacap, Jawa Tengah</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -353,7 +1323,7 @@
                             </div>
                             <div>
                                 <h3>Email</h3>
-                                <p>hello@karmila.dev</p>
+                                <p>karmila2566@gmail.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -362,7 +1332,7 @@
                             </div>
                             <div>
                                 <h3>Telepon</h3>
-                                <p>+62 812 3456 7890</p>
+                                <p>+62 831 1170 1845</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -371,7 +1341,7 @@
                             </div>
                             <div>
                                 <h3>Website</h3>
-                                <p>www.karmila.dev</p>
+                                <p>www.karmila.com</p>
                             </div>
                         </div>
                     </div>
@@ -389,7 +1359,7 @@
                             <div class="form-group">
                                 <textarea class="form-control" placeholder="Pesan Anda" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Pesan</button>
+                            <button type="submit" class="btn btn-primary">Kirim Pesan</button>
                         </form>
                     </div>
                 </div>
@@ -397,6 +1367,143 @@
         </main>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        
+        // DOM Elements
+        const hamburger = document.getElementById('hamburger');
+        const sidebar = document.getElementById('sidebar');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const contentSections = document.querySelectorAll('.content-section');
+        const skillProgressBars = document.querySelectorAll('.skill-progress');
+        const typingText = document.getElementById('typing-text');
+        const profileCard = document.getElementById('home-profile');
+
+        // Text untuk efek mengetik
+        const texts = [
+            "Freelancer & Web Developer",
+            "UI/UX Designer",
+            "Frontend Specialist"
+        ];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        // Fungsi untuk efek mengetik
+        function typeEffect() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                // Menghapus teks
+                typingText.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                // Mengetik teks
+                typingText.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+            
+            // Jika teks selesai diketik
+            if (!isDeleting && charIndex === currentText.length) {
+                isDeleting = true;
+                typingSpeed = 1000; // Jeda sebelum mulai menghapus
+            } 
+            // Jika teks selesai dihapus
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typingSpeed = 500; // Jeda sebelum mulai mengetik teks berikutnya
+            }
+            
+            setTimeout(typeEffect, typingSpeed);
+        }
+
+        // Fungsi untuk toggle sidebar di mobile
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            hamburger.innerHTML = sidebar.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Fungsi untuk mengelola tampilan profile card
+        function manageProfileCard() {
+            const activeSection = document.querySelector('.content-section.active');
+            if (activeSection && activeSection.id === 'home') {
+                profileCard.classList.add('active');
+            } else {
+                profileCard.classList.remove('active');
+            }
+        }
+
+        // Fungsi untuk navigasi antar section
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Hapus kelas active dari semua link
+                navLinks.forEach(item => item.classList.remove('active'));
+                
+                // Tambah kelas active ke link yang diklik
+                link.classList.add('active');
+                
+                // Sembunyikan semua section
+                contentSections.forEach(section => section.classList.remove('active'));
+                
+                // Tampilkan section yang sesuai
+                const targetSection = link.getAttribute('data-section');
+                document.getElementById(targetSection).classList.add('active');
+                
+                // Kelola tampilan profile card
+                manageProfileCard();
+                
+                // Animasi skill bars
+                if (targetSection === 'skills') {
+                    setTimeout(animateSkillBars, 300);
+                }
+                
+                // Tutup sidebar di mobile setelah memilih menu
+                if (window.innerWidth <= 992) {
+                    sidebar.classList.remove('active');
+                    hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
+        // Fungsi untuk animasi skill bars
+        function animateSkillBars() {
+            skillProgressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mulai efek mengetik
+            setTimeout(typeEffect, 1000);
+            
+            // Kelola profile card saat pertama load
+            manageProfileCard();
+            
+            // Animasi skill bars jika skills section aktif
+            if (document.getElementById('skills').classList.contains('active')) {
+                animateSkillBars();
+            }
+            
+            // Animasi saat scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('.profile-card.active');
+                
+                parallaxElements.forEach(el => {
+                    const speed = 0.5;
+                    el.style.transform = `translateY(${-50 + scrolled * speed}px)`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
